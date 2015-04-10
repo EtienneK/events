@@ -1,0 +1,45 @@
+buildscript {
+	repositories {
+		jcenter { url "http://jcenter.bintray.com/" }
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.2.RELEASE")
+		classpath ("org.batcha.gradle.plugins:git-dependencies:0.2")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'eclipse'
+apply plugin: 'git-dependencies'
+
+group = "com.etiennek.events"
+version = "0.0.1"
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories { maven { url "http://repo1.maven.org/maven2"
+	} }
+
+ext {
+	guavaVersion = '18.0'
+	camelVersion = '2.15.1'
+	gsonVersion = '2.3.1'
+	awaitilityVersion = '1.6.3'
+}
+
+dependencies {
+	// Spring Boot
+	compile "org.springframework.boot:spring-boot-starter-web"
+	compile "org.springframework.boot:spring-boot-starter-amqp"
+	// Other
+	compile "com.google.guava:guava:$guavaVersion"
+	compile "com.google.code.gson:gson:$gsonVersion"
+	compile "com.jayway.awaitility:awaitility:$awaitilityVersion"
+	compile "org.hsqldb:hsqldb"
+
+	// Test
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
