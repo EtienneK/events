@@ -19,8 +19,7 @@ version = "0.0.1"
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-repositories { maven { url "http://repo1.maven.org/maven2"
-	} }
+repositories { maven { url "http://repo1.maven.org/maven2" } }
 
 ext {
 	guavaVersion = '18.0'
@@ -35,7 +34,6 @@ dependencies {
 	compile "org.springframework.boot:spring-boot-starter-amqp"
 	// Other
 	compile "com.google.guava:guava:$guavaVersion"
-	compile "com.google.code.gson:gson:$gsonVersion"
 	compile "com.jayway.awaitility:awaitility:$awaitilityVersion"
 	compile "org.hsqldb:hsqldb"
 

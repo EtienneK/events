@@ -2,6 +2,7 @@ package com.etiennek.events.rabbitmq;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -32,17 +33,18 @@ public class RabbitMqConfiguration {
 
 	@Bean
 	SimpleMessageListenerContainer container(
-			ConnectionFactory connectionFactory,
-			MessageListenerAdapter listenerAdapter) {
+			ConnectionFactory connectionFactory, MessageListener messageListener) {
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
 		container.setQueueNames(QUEUE_NAME);
-		container.setMessageListener(listenerAdapter);
+		container.setMessageListener(messageListener);
+		container.setConcurrentConsumers(Runtime.getRuntime()
+				.availableProcessors());
 		return container;
 	}
 
 	@Bean
-	MessageListenerAdapter listenerAdapter(RabbitMqCommandBus commandBus) {
+	MessageListener messageListener(RabbitMqCommandBus commandBus) {
 		return new MessageListenerAdapter(commandBus, "route");
 	}
 

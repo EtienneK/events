@@ -1,14 +1,7 @@
 package com.etiennek.events.api;
 
-public abstract class Command {
-	private String id;
+import java.io.Serializable;
 
-	public Command(String id) {
-		this.id = id;
-	}
-
-	public String getId() {
-		return id;
-	}
-
+public interface Command extends Serializable {
+	void handle();
 }
